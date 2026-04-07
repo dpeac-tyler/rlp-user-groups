@@ -696,6 +696,17 @@ select:focus {
   outline-offset: 0.2rem;
 }
 
+.usa-checkbox__input:disabled + .usa-checkbox__label {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.usa-checkbox__input:disabled + .usa-checkbox__label::before {
+  cursor: not-allowed;
+  background-color: #f0f0f0;
+  border-color: #c9c9c9;
+}
+
 .usa-radio__label::before {
   content: "";
   display: block;
