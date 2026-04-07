@@ -473,7 +473,7 @@
             <tbody>
               <tr>
                 <td>Administrators</td>
-                <td>4</td>
+                <td id="group-count-administrators">4</td>
                 <td>01/07/2026</td>
                 <td>No</td>
                 <td>
@@ -487,7 +487,7 @@
               </tr>
               <tr>
                 <td>Review Team</td>
-                <td>7</td>
+                <td id="group-count-review-team">7</td>
                 <td>01/15/2026</td>
                 <td>Yes</td>
                 <td>
@@ -501,7 +501,7 @@
               </tr>
               <tr>
                 <td>Field Operations</td>
-                <td>12</td>
+                <td id="group-count-field-operations">12</td>
                 <td>02/03/2026</td>
                 <td>Yes</td>
                 <td>
@@ -515,7 +515,7 @@
               </tr>
               <tr>
                 <td>Finance Team</td>
-                <td>3</td>
+                <td id="group-count-finance-team">3</td>
                 <td>02/10/2026</td>
                 <td>No</td>
                 <td>
@@ -529,7 +529,7 @@
               </tr>
               <tr>
                 <td>Customer Service</td>
-                <td>8</td>
+                <td id="group-count-customer-service">8</td>
                 <td>02/20/2026</td>
                 <td>Yes</td>
                 <td>
@@ -1117,7 +1117,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="usa-button edit-group-save-btn" data-group="administrators">Save Changes</button>
+        <button type="button" class="usa-button edit-group-save-btn" data-group="administrators">Save</button>
         <button type="button" class="usa-button usa-button--secondary edit-group-cancel-btn">Cancel</button>
       </div>
     </div>
@@ -1275,7 +1275,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="usa-button edit-group-save-btn" data-group="review-team">Save Changes</button>
+        <button type="button" class="usa-button edit-group-save-btn" data-group="review-team">Save</button>
         <button type="button" class="usa-button usa-button--secondary edit-group-cancel-btn">Cancel</button>
       </div>
     </div>
@@ -1433,7 +1433,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="usa-button edit-group-save-btn" data-group="field-operations">Save Changes</button>
+        <button type="button" class="usa-button edit-group-save-btn" data-group="field-operations">Save</button>
         <button type="button" class="usa-button usa-button--secondary edit-group-cancel-btn">Cancel</button>
       </div>
     </div>
@@ -1591,7 +1591,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="usa-button edit-group-save-btn" data-group="finance-team">Save Changes</button>
+        <button type="button" class="usa-button edit-group-save-btn" data-group="finance-team">Save</button>
         <button type="button" class="usa-button usa-button--secondary edit-group-cancel-btn">Cancel</button>
       </div>
     </div>
@@ -1749,7 +1749,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="usa-button edit-group-save-btn" data-group="customer-service">Save Changes</button>
+        <button type="button" class="usa-button edit-group-save-btn" data-group="customer-service">Save</button>
         <button type="button" class="usa-button usa-button--secondary edit-group-cancel-btn">Cancel</button>
       </div>
     </div>
@@ -2341,8 +2341,18 @@
             return;
           }
 
+          // Update group count in the table
+          const groupSlug = saveBtn.getAttribute('data-group');
+          const groupCountCell = document.getElementById(`group-count-${groupSlug}`);
+          if (groupCountCell) {
+            groupCountCell.textContent = selectedUsers;
+          }
+
+          // Close modal
           closeEditModal();
-          alert(`User group "${groupName}" updated with ${selectedUsers} user(s).`);
+
+          // Show success notification
+          showNotification('Changes saved successfully');
         });
       }
     });
@@ -2380,6 +2390,32 @@
         }
       });
     });
+
+    // Notification function
+    function showNotification(message) {
+      const notification = document.getElementById('success-notification');
+      const notificationText = document.getElementById('notification-text');
+
+      notificationText.textContent = message;
+      notification.classList.remove('hide');
+      notification.classList.add('show');
+
+      // Hide after 3 seconds
+      setTimeout(() => {
+        notification.classList.remove('show');
+        notification.classList.add('hide');
+      }, 3000);
+    }
   </script>
+
+  <!-- Success Notification -->
+  <div id="success-notification" class="notification hide">
+    <div class="notification-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00a91c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+    <span id="notification-text" class="notification-text">Changes saved successfully</span>
+  </div>
 </body>
 </html>
