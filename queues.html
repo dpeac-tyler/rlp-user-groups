@@ -185,9 +185,56 @@
             </div>
             <div class="tablet:grid-col-4">
               <label class="usa-label" for="user-group">User Group</label>
-              <select class="usa-select" id="user-group" name="user-group">
-                <option value="">Please Select</option>
-              </select>
+              <div class="multiselect-wrapper">
+                <button type="button" class="usa-select multiselect-button" id="user-group-button" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="multiselect-button-text">Please Select</span>
+                  <span class="multiselect-arrow">▼</span>
+                </button>
+                <div class="multiselect-dropdown" id="user-group-dropdown" hidden>
+                  <div class="multiselect-options">
+                    <label class="multiselect-option">
+                      <input type="checkbox" name="user-group" value="Administrators">
+                      <span>Administrators</span>
+                    </label>
+                    <label class="multiselect-option">
+                      <input type="checkbox" name="user-group" value="All User Group">
+                      <span>All User Group</span>
+                    </label>
+                    <label class="multiselect-option">
+                      <input type="checkbox" name="user-group" value="Analyst Team Group">
+                      <span>Analyst Team Group</span>
+                    </label>
+                    <label class="multiselect-option">
+                      <input type="checkbox" name="user-group" value="Back office Supervisor">
+                      <span>Back office Supervisor</span>
+                    </label>
+                    <label class="multiselect-option">
+                      <input type="checkbox" name="user-group" value="Back Office Users">
+                      <span>Back Office Users</span>
+                    </label>
+                    <label class="multiselect-option">
+                      <input type="checkbox" name="user-group" value="Demo Group">
+                      <span>Demo Group</span>
+                    </label>
+                    <label class="multiselect-option">
+                      <input type="checkbox" name="user-group" value="Group 1">
+                      <span>Group 1</span>
+                    </label>
+                    <label class="multiselect-option">
+                      <input type="checkbox" name="user-group" value="Group A">
+                      <span>Group A</span>
+                    </label>
+                    <label class="multiselect-option">
+                      <input type="checkbox" name="user-group" value="MangersQA">
+                      <span>MangersQA</span>
+                    </label>
+                    <label class="multiselect-option">
+                      <input type="checkbox" name="user-group" value="Supervisors">
+                      <span>Supervisors</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -362,6 +409,70 @@
         }
       });
     });
+
+    // Multi-select functionality
+    (function() {
+      const button = document.getElementById('user-group-button');
+      const dropdown = document.getElementById('user-group-dropdown');
+      const buttonText = button.querySelector('.multiselect-button-text');
+      const checkboxes = dropdown.querySelectorAll('input[type="checkbox"]');
+
+      // Toggle dropdown
+      button.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+        if (isExpanded) {
+          this.setAttribute('aria-expanded', 'false');
+          dropdown.setAttribute('hidden', '');
+        } else {
+          this.setAttribute('aria-expanded', 'true');
+          dropdown.removeAttribute('hidden');
+        }
+      });
+
+      // Update button text when selections change
+      function updateButtonText() {
+        const selected = Array.from(checkboxes)
+          .filter(cb => cb.checked)
+          .map(cb => cb.value);
+
+        if (selected.length === 0) {
+          buttonText.textContent = 'Please Select';
+        } else if (selected.length === 1) {
+          buttonText.textContent = selected[0];
+        } else {
+          buttonText.textContent = `${selected.length} selected`;
+        }
+      }
+
+      // Handle checkbox changes
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateButtonText);
+      });
+
+      // Prevent dropdown from closing when clicking inside
+      dropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+          button.setAttribute('aria-expanded', 'false');
+          dropdown.setAttribute('hidden', '');
+        }
+      });
+
+      // Handle clear button to reset multi-select
+      const clearButton = document.querySelector('.usa-button--outline');
+      if (clearButton) {
+        clearButton.addEventListener('click', function() {
+          checkboxes.forEach(cb => cb.checked = false);
+          updateButtonText();
+        });
+      }
+    })();
   </script>
 </body>
 </html>
