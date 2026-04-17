@@ -102,6 +102,14 @@
 
       <h1 class="page-title page-title--underlined">Open Applications</h1>
 
+      <!-- Permission Error Alert -->
+      <div class="usa-alert usa-alert--error" id="permission-error" hidden>
+        <div class="usa-alert__body">
+          <h4 class="usa-alert__heading">Permission Error</h4>
+          <p class="usa-alert__text" id="permission-error-text"></p>
+        </div>
+      </div>
+
       <div class="margin-top-2">
         <div class="usa-accordion usa-accordion--bordered">
           <h3 class="usa-accordion__heading">
@@ -141,7 +149,9 @@
                 <button type="button" class="usa-button usa-button--outline category-filter-btn active">Open</button>
               </li>
               <li class="usa-button-group__item">
-                <button type="button" class="usa-button usa-button--outline category-filter-btn">Pending</button>
+                <a href="pending.html">
+                  <button type="button" class="usa-button usa-button--outline category-filter-btn">Pending</button>
+                </a>
               </li>
               <li class="usa-button-group__item">
                 <button type="button" class="usa-button usa-button--outline category-filter-btn">Closed</button>
@@ -246,6 +256,8 @@
       </div>
 
       <div class="margin-top-2">
+        <button type="button" class="usa-button" id="claim-selected-btn">Claim Selected</button>
+
         <div class="table-controls">
           <div class="table-controls__left">
             <strong>Showing 1 - 5 of 5 Entries</strong>
@@ -264,6 +276,10 @@
         <table class="usa-table usa-table--borderless usa-table--striped">
           <thead>
             <tr>
+              <th scope="col">
+                <input type="checkbox" id="select-all" aria-label="Select all rows">
+                Select All
+              </th>
               <th scope="col" role="columnheader" aria-sort="none">Application Title <span class="sort-arrows"></span></th>
               <th scope="col" role="columnheader" aria-sort="none">Task Name <span class="sort-arrows"></span></th>
               <th scope="col" role="columnheader" aria-sort="none">Constituent Name <span class="sort-arrows"></span></th>
@@ -275,81 +291,96 @@
           </thead>
           <tbody>
             <tr>
+              <td>
+                <input type="checkbox" class="row-checkbox" aria-label="Select row">
+              </td>
               <td>Business Application 123</td>
               <td>Task 1 of 1</td>
               <td>John Smith</td>
               <td>Alan Jones</td>
               <td>03/15/2026</td>
-              <td>License Reviewers</td>
+              <td>Analyst Team Group</td>
               <td>
                 <a href="task-detail.html?id=1" class="icon-button" aria-label="View Task">
                   <img src="assets/eye-icon.png" alt="" width="30" height="30">
                 </a>
-                <a href="#" class="icon-button" aria-label="Claim Task">
+                <a href="#" class="icon-button claim-single-task" aria-label="Claim Task">
                   <img src="assets/claim-task.png" alt="" width="30" height="30">
                 </a>
               </td>
             </tr>
             <tr>
+              <td>
+                <input type="checkbox" class="row-checkbox" aria-label="Select row">
+              </td>
               <td>Professional Engineer Application</td>
               <td>Task 1 of 2</td>
               <td>Maria Garcia</td>
               <td>Sarah Johnson</td>
               <td>03/16/2026</td>
-              <td>Application Processors</td>
+              <td>Administrators</td>
               <td>
                 <a href="task-detail.html?id=2" class="icon-button" aria-label="View Task">
                   <img src="assets/eye-icon.png" alt="" width="30" height="30">
                 </a>
-                <a href="#" class="icon-button" aria-label="Claim Task">
+                <a href="#" class="icon-button claim-single-task" aria-label="Claim Task">
                   <img src="assets/claim-task.png" alt="" width="30" height="30">
                 </a>
               </td>
             </tr>
             <tr>
+              <td>
+                <input type="checkbox" class="row-checkbox" aria-label="Select row">
+              </td>
               <td>Contractor License Renewal</td>
               <td>Task 1 of 1</td>
               <td>Robert Williams</td>
               <td>Michael Chen</td>
               <td>03/17/2026</td>
-              <td>License Reviewers</td>
+              <td>Analyst Team Group</td>
               <td>
                 <a href="task-detail.html?id=3" class="icon-button" aria-label="View Task">
                   <img src="assets/eye-icon.png" alt="" width="30" height="30">
                 </a>
-                <a href="#" class="icon-button" aria-label="Claim Task">
+                <a href="#" class="icon-button claim-single-task" aria-label="Claim Task">
                   <img src="assets/claim-task.png" alt="" width="30" height="30">
                 </a>
               </td>
             </tr>
             <tr>
+              <td>
+                <input type="checkbox" class="row-checkbox" aria-label="Select row">
+              </td>
               <td>Business Application 456</td>
               <td>Task 2 of 2</td>
               <td>Jennifer Lee</td>
               <td>Alan Jones</td>
               <td>03/18/2026</td>
-              <td>Application Processors</td>
+              <td>Analyst Team Group</td>
               <td>
                 <a href="task-detail.html?id=4" class="icon-button" aria-label="View Task">
                   <img src="assets/eye-icon.png" alt="" width="30" height="30">
                 </a>
-                <a href="#" class="icon-button" aria-label="Claim Task">
+                <a href="#" class="icon-button claim-single-task" aria-label="Claim Task">
                   <img src="assets/claim-task.png" alt="" width="30" height="30">
                 </a>
               </td>
             </tr>
             <tr>
+              <td>
+                <input type="checkbox" class="row-checkbox" aria-label="Select row">
+              </td>
               <td>Professional Engineer Application</td>
               <td>Task 1 of 1</td>
               <td>David Brown</td>
               <td>Sarah Johnson</td>
               <td>03/19/2026</td>
-              <td>License Reviewers</td>
+              <td>Administrators</td>
               <td>
                 <a href="task-detail.html?id=5" class="icon-button" aria-label="View Task">
                   <img src="assets/eye-icon.png" alt="" width="30" height="30">
                 </a>
-                <a href="#" class="icon-button" aria-label="Claim Task">
+                <a href="#" class="icon-button claim-single-task" aria-label="Claim Task">
                   <img src="assets/claim-task.png" alt="" width="30" height="30">
                 </a>
               </td>
@@ -393,7 +424,50 @@
     </main>
   </div>
 
+  <!-- Claim Confirmation Modal -->
+  <div class="modal" id="claim-modal" hidden>
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirm Claim</h2>
+        <button class="modal-close" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="claim-modal-text">Are you sure you want to claim these tasks?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="usa-button" id="confirm-claim-btn">Yes, Claim Tasks</button>
+        <button type="button" class="usa-button usa-button--outline" id="cancel-claim-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Notification -->
+  <div class="notification" id="success-notification">
+    <div class="notification-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" fill="#00a91c"/>
+        <path d="M7 12l3 3 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="notification-text">Task(s) claimed successfully</div>
+  </div>
+
   <script>
+    // Reset localStorage - uncomment this line to clear all data and refresh the page
+    // localStorage.clear(); location.reload();
+
+    // Initialize localStorage on first load - clear My Tasks so it starts empty
+    if (!localStorage.getItem('initialized')) {
+      localStorage.setItem('myTasks', '[]');
+      localStorage.setItem('pendingTasks', '[]');
+      localStorage.setItem('initialized', 'true');
+    }
+
     // Accordion functionality
     document.querySelectorAll('.usa-accordion__button').forEach(button => {
       button.addEventListener('click', function() {
@@ -473,6 +547,216 @@
         });
       }
     })();
+
+    // Select All functionality
+    const selectAllCheckbox = document.getElementById('select-all');
+    const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+
+    selectAllCheckbox.addEventListener('change', function() {
+      rowCheckboxes.forEach(checkbox => {
+        checkbox.checked = selectAllCheckbox.checked;
+      });
+    });
+
+    // Update select-all state when individual checkboxes change
+    rowCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const allChecked = Array.from(rowCheckboxes).every(cb => cb.checked);
+        const someChecked = Array.from(rowCheckboxes).some(cb => cb.checked);
+
+        selectAllCheckbox.checked = allChecked;
+        selectAllCheckbox.indeterminate = someChecked && !allChecked;
+      });
+    });
+
+    // Claim Selected functionality
+    const claimButton = document.getElementById('claim-selected-btn');
+    const claimModal = document.getElementById('claim-modal');
+    const claimModalText = document.getElementById('claim-modal-text');
+    const confirmClaimBtn = document.getElementById('confirm-claim-btn');
+    const cancelClaimBtn = document.getElementById('cancel-claim-btn');
+    const modalCloseBtn = document.querySelector('.modal-close');
+    const successNotification = document.getElementById('success-notification');
+
+    claimButton.addEventListener('click', function() {
+      const checkedBoxes = Array.from(rowCheckboxes).filter(cb => cb.checked);
+
+      if (checkedBoxes.length === 0) {
+        alert('Please select at least one task to claim.');
+        return;
+      }
+
+      if (checkedBoxes.length >= 2) {
+        claimModalText.textContent = `Are you sure you want to claim these ${checkedBoxes.length} Tasks?`;
+        claimModal.removeAttribute('hidden');
+      } else {
+        claimTasks();
+      }
+    });
+
+    function claimTasks() {
+      try {
+        const checkedBoxes = Array.from(rowCheckboxes).filter(cb => cb.checked);
+        const currentUserGroups = ['Analyst Team Group']; // Current user's groups
+        const restrictedGroup = 'Administrators';
+
+        // Separate tasks by permission
+        const allowedTasks = [];
+        const restrictedTasks = [];
+        const allowedRows = [];
+        const restrictedRows = [];
+
+        checkedBoxes.forEach(cb => {
+          const row = cb.closest('tr');
+          const cells = row.querySelectorAll('td');
+          const userGroup = cells[6].textContent.trim();
+
+          const task = {
+            applicationTitle: cells[1].textContent.trim(),
+            taskName: cells[2].textContent.trim(),
+            constituentName: cells[3].textContent.trim(),
+            submittedBy: cells[4].textContent.trim(),
+            submittedDate: cells[5].textContent.trim(),
+            userGroup: userGroup,
+            claimedDate: new Date().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }),
+            claimedBy: 'Current User',
+            row: row
+          };
+
+          if (userGroup === restrictedGroup) {
+            restrictedTasks.push(task);
+            restrictedRows.push(row);
+          } else {
+            allowedTasks.push(task);
+            allowedRows.push(row);
+          }
+        });
+
+        // Show error if there are restricted tasks
+        const permissionError = document.getElementById('permission-error');
+        const permissionErrorText = document.getElementById('permission-error-text');
+
+        if (restrictedTasks.length > 0) {
+          const taskWord = restrictedTasks.length === 1 ? 'application' : 'applications';
+          permissionErrorText.textContent = `${restrictedTasks.length} open ${taskWord} cannot be claimed due to user group permissions.`;
+          permissionError.removeAttribute('hidden');
+
+          // Scroll to error
+          permissionError.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+          // Uncheck restricted task checkboxes
+          restrictedRows.forEach(row => {
+            const checkbox = row.querySelector('.row-checkbox');
+            if (checkbox) checkbox.checked = false;
+          });
+        } else {
+          permissionError.setAttribute('hidden', '');
+        }
+
+        // Only claim allowed tasks
+        if (allowedTasks.length > 0) {
+          const existingPending = JSON.parse(localStorage.getItem('pendingTasks') || '[]');
+          const existingMyTasks = JSON.parse(localStorage.getItem('myTasks') || '[]');
+
+          localStorage.setItem('pendingTasks', JSON.stringify([...existingPending, ...allowedTasks]));
+          localStorage.setItem('myTasks', JSON.stringify([...existingMyTasks, ...allowedTasks]));
+
+          // Remove only allowed rows from table
+          allowedRows.forEach(row => {
+            row.remove();
+          });
+
+          // Show success notification
+          showNotification();
+        }
+
+        // Reset select all checkbox
+        selectAllCheckbox.checked = false;
+        selectAllCheckbox.indeterminate = false;
+
+      } catch (error) {
+        console.error('Error in claimTasks:', error);
+        alert('Error claiming tasks: ' + error.message);
+      }
+    }
+
+    confirmClaimBtn.addEventListener('click', function() {
+      claimModal.setAttribute('hidden', '');
+      claimTasks();
+    });
+
+    cancelClaimBtn.addEventListener('click', function() {
+      claimModal.setAttribute('hidden', '');
+    });
+
+    modalCloseBtn.addEventListener('click', function() {
+      claimModal.setAttribute('hidden', '');
+    });
+
+    // Close modal when clicking overlay
+    claimModal.querySelector('.modal-overlay').addEventListener('click', function() {
+      claimModal.setAttribute('hidden', '');
+    });
+
+    // Handle individual claim task icons
+    document.querySelectorAll('.claim-single-task').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const row = this.closest('tr');
+        const cells = row.querySelectorAll('td');
+        const userGroup = cells[6].textContent.trim();
+        const restrictedGroup = 'Administrators';
+
+        const permissionError = document.getElementById('permission-error');
+        const permissionErrorText = document.getElementById('permission-error-text');
+
+        // Check if user has permission
+        if (userGroup === restrictedGroup) {
+          permissionErrorText.textContent = '1 open application cannot be claimed due to user group permissions.';
+          permissionError.removeAttribute('hidden');
+          permissionError.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+
+        // Hide any existing error
+        permissionError.setAttribute('hidden', '');
+
+        const task = {
+          applicationTitle: cells[1].textContent.trim(),
+          taskName: cells[2].textContent.trim(),
+          constituentName: cells[3].textContent.trim(),
+          submittedBy: cells[4].textContent.trim(),
+          submittedDate: cells[5].textContent.trim(),
+          userGroup: userGroup,
+          claimedDate: new Date().toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }),
+          claimedBy: 'Current User'
+        };
+
+        // Store in localStorage
+        const existingPending = JSON.parse(localStorage.getItem('pendingTasks') || '[]');
+        const existingMyTasks = JSON.parse(localStorage.getItem('myTasks') || '[]');
+
+        localStorage.setItem('pendingTasks', JSON.stringify([...existingPending, task]));
+        localStorage.setItem('myTasks', JSON.stringify([...existingMyTasks, task]));
+
+        // Remove row from table
+        row.remove();
+
+        // Show success notification
+        showNotification();
+      });
+    });
+
+    function showNotification() {
+      successNotification.classList.add('show');
+      setTimeout(() => {
+        successNotification.classList.remove('show');
+        successNotification.classList.add('hide');
+      }, 3000);
+      setTimeout(() => {
+        successNotification.classList.remove('hide');
+      }, 3400);
+    }
   </script>
 </body>
 </html>
